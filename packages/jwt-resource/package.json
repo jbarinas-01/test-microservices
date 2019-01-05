@@ -1,0 +1,23 @@
+{
+    "name": "jwt-audience",
+    "version": "1.0.0",
+    "private": true,
+    "description": "authentication with Node.js",
+    "author": "jbarinas",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "keywords": [
+        "express",
+        "Auth0",
+        "JWT"
+    ],
+    "dependencies": {
+        "@common/lib": "file:../common/lib",
+        "body-parser": "^1.18.3",
+        "cors": "^2.8.5",
+        "express": "^4.16.4",
+        "express-jwt": "^5.3.1"
+    }
+}

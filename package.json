@@ -2,8 +2,27 @@
     "name": "test-microservices",
     "version": "1.0.0",
     "private": true,
-    "description": "",
+    "description": "nodejs/jwt",
     "author": "jbarinas-01",
-    "homepage": "https://github.com/jbarinas-01/test-microservices/tree/master#readme",
-    "scripts": {}
+    "homepage": "https://github.com/jbarinas-01/test-microservices/tree/nodejs/jwt#readme",
+    "scripts": {
+        "docker:build:jwt-app": "docker build -t test-microservices/nodejs/jwt/jwt-app packages/jwt-app",
+        "docker:build:jwt-authenticator": "docker build -t test-microservices/nodejs/jwt/jwt-authenticator -f packages/jwt-authenticator/Dockerfile ./packages",
+        "docker:build:jwt-resource": "docker build -t test-microservices/nodejs/jwt/jwt-resource -f packages/jwt-resource/Dockerfile ./packages",
+        "docker:build": "npm run docker:build:jwt-app; npm run docker:build:jwt-authenticator; npm run docker:build:jwt-resource;",
+        "docker:run:jwt-app": "docker run --rm --name jwt-app -d -p 3000:3000 test-microservices/nodejs/jwt/jwt-app",
+        "docker:run:jwt-authenticator": "docker run --rm --name jwt-authenticator -d -p 8000:8000 test-microservices/nodejs/jwt/jwt-authenticator",
+        "docker:run:jwt-resource": "docker run --rm --name jwt-resource -d -p 8100:8100 test-microservices/nodejs/jwt/jwt-resource",
+        "docker:run": "npm run docker:run:jwt-app; npm run docker:run:jwt-authenticator; npm run docker:run:jwt-resource;",
+        "docker:stop:jwt-app": "docker stop jwt-app",
+        "docker:stop:jwt-authenticator": "docker stop jwt-authenticator",
+        "docker:stop:jwt-resource": "docker stop jwt-resource",
+        "docker:stop": "npm run docker:stop:jwt-app; npm run docker:stop:jwt-authenticator; npm run docker:stop:jwt-resource;",
+        "docker:rmi:jwt-app": "docker rmi test-microservices/nodejs/jwt/jwt-app",
+        "docker:rmi:jwt-authenticator": "docker rmi test-microservices/nodejs/jwt/jwt-authenticator",
+        "docker:rmi:jwt-resource": "docker rmi test-microservices/nodejs/jwt/jwt-resource",
+        "docker:rmi": "npm run docker:rmi:jwt-app; npm run docker:rmi:jwt-authenticator; npm run docker:rmi:jwt-resource;",
+        "start": "npm run docker:build; npm run docker:run;",
+        "clean": "npm run docker:stop; npm run docker:rmi;"
+    }
 }
